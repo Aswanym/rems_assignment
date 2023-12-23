@@ -1,0 +1,15 @@
+{% extends 'common/base.html' %}
+{% block title %} home {% endblock %}
+{% block content %}
+    <section class="homepage" id="home">
+      <div class="content">
+        <div class="text" style="color:black;">
+          <h1>Rental Homes</h1>
+          <p >
+            Helping people with rental homes. <br> All amenities are available here! </p>
+        </div>
+        <a href="{% url 'property_list' %}">view Properties</a>
+      </div>
+    </section>
+
+{% endblock %}

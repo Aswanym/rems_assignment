@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+{% block title %}  {% endblock %}
+{% block content %}
+
+<section id="services" class="services">
+      <div class="container">
+        <div class="row">
+            {% for property in property_list %}
+          <div class=" col-md-6 p-3" >
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{property.property_name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{property.address}}</h6>
+                <p class="card-text">{{property.city}} {{property.pincode}}</p>
+                <a href="{% url 'property_profile' property.property_id %}" class="card-link">view</a>
+                <a href="{% url 'create_unit' property.property_id %}" class="card-link">Add unit</a>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+      </div>
+    </section>
+
+
+{% endblock %}

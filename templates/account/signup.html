@@ -1,0 +1,29 @@
+
+{% extends 'common/signup_base.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="registration form">
+      <header>Signup</header>
+      <form action="{%url 'signup' %}" method="post">
+          {% csrf_token %}
+        <input type="text" name="email" placeholder="email">
+          <input type="text" name="name" placeholder="name">
+        <input type="password" name="password" placeholder="password">
+        <input type="password" name="confirm_password" placeholder="Confirm password">
+          <button name="submit" type="submit" class="button">Signup</button>
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account?
+         <a class="link" href="{%url 'login' %}">Login Here</a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <section >
+      <div class="profile_content">
+        <div class="row">
+          <div class="col-12">
+            <h1>Rent this unit</h1>
+            <form action="{% url 'assign_unit' unit.unit_id %}" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="button">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

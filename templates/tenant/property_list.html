@@ -1,0 +1,37 @@
+{% extends 'common/base.html' %}
+{% block title %}  {% endblock %}
+{% block content %}
+<section id="services" class="services">
+    <div class="container">
+        <h1>Properties and units</h1>
+        <hr>
+       {% for property in properties %}
+        <h2>{{ property.property_name }}</h2>
+        <p>Address: {{ property.address }}, {{ property.city }} - {{ property.pincode }}</p>
+        <h3>Units:</h3>
+        <table class="table">
+          <thead>
+            <tr>
+                <th scope="col">unit name</th>
+              <th scope="col">Rent cost</th>
+              <th scope="col">action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for unit in property.units.all %}
+            <tr>
+                <td>{{ unit.unit_name }}</td>
+              <td>{{ unit.rent_cost }}</td>
+                {% if unit.is_avail %}
+              <td><a href="{% url 'assign_unit' unit.unit_id %}">rent this</a></td>
+                {% else %}
+                 <td>Not available</td>
+                {% endif %}
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    {% endfor %}
+    </div>
+</section>
+{% endblock %}

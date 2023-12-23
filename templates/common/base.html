@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leasset</title>
+      {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <!-- Fontawesome Link for Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <h2 class="logo"><a href="{%url 'index' %}">LEASSET</a></h2>
+        <input type="checkbox" id="menu-toggler">
+        <label for="menu-toggler" id="hamburger-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18V11H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </label>
+         {% if user.is_authenticated and user.is_superuser %}
+          <ul class="all-links">
+          <li><a href="">Welcome {{user.name}}!</a></li>
+            <li><a href="{%url 'create_property' %}">Create property</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+
+        {% elif user.is_authenticated and not user.is_superuser %}
+        <ul class="all-links">
+          <li><a href="">Welcome {{user.name}}!</a></li>
+          <li><a href="{%url 'view_tenant' %}">Profile</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+
+        {% elif not user.is_authenticated %}
+        <ul class="all-links">
+          <li><a href="{% url 'signup' %}">Signup</a></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+        {% endif %}
+      </nav>
+    </header>
+    {% block content %}
+	{% endblock %}
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  <script src="{% static 'js/profile.js' %}"></script>
+  </body>
+</html>

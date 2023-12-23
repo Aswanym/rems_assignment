@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+{% block title %} home {% endblock %}
+{% block content %}
+<div class="profile_view_container">
+    <div class="row">
+      <div class="col-lg-7 col-md-6 pl-xl-3">
+        <h5 class="font-weight-normal">Personal information</h5>
+        <div class="mb-2">
+          <ul class="list-unstyled">
+            {% for item in context %}
+            <li class="media" >
+              <span class="w-35 text-black font-weight-normal">{{item.field_name}}:</span>
+              <label class="media-body">{{item.field_value}}</label>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div>
+          <button name="submit"  class="small-button"><a style="text-decoration: none; color: #fff;" href="{%url 'edit_tenant' %}">Edit profile</a></button>
+        </div>
+        <h5 class="font-weight-normal">Rental info</h5>
+        <table class="table">
+          <thead>
+            <tr>
+                <th scope="col">unit name</th>
+              <th scope="col">Rent cost</th>
+              <th scope="col">Agreement end date</th>
+              <th scope="col">Rental date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in rental_info %}
+            <tr>
+              <td>{{ item.unit.unit_name }}</td>
+              <td>₹ {{ item.unit.rent_cost }}</td>
+              <td>{{ item.agreement_end_date }}</td>
+              <td>{{ item.monthly_rent_date }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+{% endblock %}

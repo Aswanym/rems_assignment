@@ -1,0 +1,64 @@
+{% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <section >
+
+<!--        <h1>Property Details</h1>-->
+<!--        <p>Property Name: {{ property_instance.property_name }}</p>-->
+<!--        <p>Address: {{ property_instance.address }}</p>-->
+
+<!--        <h2>Units</h2>-->
+<!--        <ul>-->
+<!--          {% for unit in property_instance.units.all %}-->
+<!--            <li>Unit ID: {{ unit.unit_id }}</li>-->
+<!--            <li>Rent Cost: {{ unit.rent_cost }}</li>-->
+<!--            &lt;!&ndash; Display other unit details as needed &ndash;&gt;-->
+<!--          {% endfor %}-->
+<!--        </ul>-->
+      <div class="profile_content">
+        <div class="row">
+          <div class="col-12 p3">
+              <div class="card text-center">
+                  <div class="card-header">
+                    property details
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{property_instance.property_name}}</h5>
+                    <p class="card-text">{{property_instance.address}}</p>
+                      <p class="card-text">{{property_instance.city}} | {{property_instance.pincode}}</p>
+                  </div>
+                  <div class="card-header">
+                    unit details
+                  </div>
+                      <div class="card-body">
+                          <table class="table">
+          <thead>
+            <tr>
+                <th scope="col">unit name</th>
+              <th scope="col">Rent cost</th>
+              <th scope="col">action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for unit in property_instance.units.all %}
+            <tr>
+                <td>{{ unit.unit_name }}</td>
+              <td>₹ {{ unit.rent_cost }}</td>
+                {% if unit.is_avail %}
+              <td>avail</td>
+                {% else %}
+                 <td>Not available</td>
+                {% endif %}
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+
+                      </div>
+
+                </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
