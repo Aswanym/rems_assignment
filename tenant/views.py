@@ -3,8 +3,10 @@ from .models import Tenant, UnitAssignment
 from .forms import TenantForm, UnitAssignmentForm
 from account.models import User
 from property.models import Property, Unit
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required(login_url='login')
 def edit_tenant(request):
     user = request.user  # Assuming the user is authenticated
 
@@ -46,7 +48,7 @@ def property_list(request):
     properties = Property.objects.prefetch_related('units')
     return render(request, 'tenant/property_list.html', {'properties': properties})
 
-
+@login_required(login_url='login')
 def assign_unit_to_tenant(request, pk):
     unit_id = pk
     unit_instance = Unit.objects.get(unit_id=unit_id)

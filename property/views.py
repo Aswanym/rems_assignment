@@ -3,6 +3,7 @@ from .models import Property
 from django.shortcuts import render, redirect
 from .forms import PropertyForm, UnitForm
 
+@login_required(login_url='admin_login')
 def property_create(request):
     if request.method == 'POST':
         form = PropertyForm(request.POST)
