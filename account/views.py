@@ -10,41 +10,41 @@ from property.models import Property
 
 def index(request):
     return render(request, 'account/index.html')
-
-def signup(request):
-    if request.user.is_authenticated:
-        return redirect('index')
-
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, "Registration completed.")
-            return redirect('index')
-        else:
-            messages.error(request, "Registration not completed, Try again.")
-            return redirect('signup')
-    form = UserCreationForm()
-    return render(request, 'account/signup.html', context={"form": form})
-
+#
 # def signup(request):
 #     if request.user.is_authenticated:
 #         return redirect('index')
 #
 #     if request.method == 'POST':
-#         email = request.POST['email']
-#         name = request.POST['name']
-#         password = request.POST['password']
-#         user = User.objects.create_user(email=email, name=name, password=password)
-#         if user is not None:
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
 #             login(request, user)
 #             messages.success(request, "Registration completed.")
 #             return redirect('index')
 #         else:
 #             messages.error(request, "Registration not completed, Try again.")
 #             return redirect('signup')
-#     return render(request, 'account/signup.html')
+#     form = UserCreationForm()
+#     return render(request, 'account/signup.html', context={"form": form})
+
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        name = request.POST['name']
+        password = request.POST['password']
+        user = User.objects.create_user(email=email, name=name, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Registration completed.")
+            return redirect('index')
+        else:
+            messages.error(request, "Registration not completed, Try again.")
+            return redirect('signup')
+    return render(request, 'account/signup.html')
 
 def login_request(request):
     if request.user.is_authenticated:
